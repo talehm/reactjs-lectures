@@ -1,4 +1,5 @@
-import React from 'react';
+
+  import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import articleImg from '../../../assets/images/article.jpeg'
 import Grid from '@material-ui/core/Grid';
 import { Link} from "react-router-dom";
+import Pagination from "./Pagination"
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -21,7 +23,7 @@ const useStyles = makeStyles({
 });
 
 
-export default function Articles() {
+export default function ArticlesDesktop() {
   const classes = useStyles();
 
   return (
@@ -32,7 +34,7 @@ export default function Articles() {
                         Our Articles
                     </Typography>
           </Grid>
-          {[1,2,3,4].map(i=>
+          {[1,2,3,4,5,6,7,8].map(i=>
             <Grid item xs={3} key={i}>
             <Card className={classes.root}>
                 <CardActionArea>
@@ -62,10 +64,10 @@ export default function Articles() {
         </Card>
       </Grid>
             )}
-            <Grid item xs={12} >
-            <Link to="/articles"><Button size="small" variant="contained" color="primary" >
-                    See More
-            </Button></Link>
+            <Grid item xs={3} >
+           
+            <Pagination />
+
             </Grid>
           
       </Grid>

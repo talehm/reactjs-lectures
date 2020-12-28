@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Front from './home/Front'
 import Articles from './home/Articles'
 import ContactUS from './home/ContactUs'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -26,6 +27,7 @@ function Main() {
     //const arry=[1,2,3,4,5]
     
   return (
+    
       <Paper elevation={5}>
         <div className={classes.root}>
       <Grid container >
