@@ -1,42 +1,38 @@
-import React, { useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import React , {useState,useEffect} from 'react';
+import { MemoryRouter, Route,useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import Pagination from '@material-ui/lab/Pagination';
-import {useHistory} from "react-router-dom"
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
+import PaginationItem from '@material-ui/lab/PaginationItem';
+import Button from '@material-ui/core/Button'
+import Paper from "@material-ui/core/Paper"
+import IconButton from '@material-ui/core/IconButton';
 
-const PaginationControlled=(props)=> {
-  const classes = useStyles();
-  const history = useHistory()
-  const [page, setPage] = React.useState(1);
-  const handleChange = (event, value) => {
-    
-    if (value==1){
-        history.push("/articles")
+export default function PaginationLink(props) {
+  let history = useHistory();
+  const totalPage = 10
+  const query = history.location.pathname.split("/");
+  let index=parseInt(query[query.length-1],10)
+  if (isNaN(index)){
+     index = 1
+  } 
+
+  const [page,setPage]=useState(index);
+
+  const redirect = (i)=>{
+    if (i===1){
+      history.push("/articles")
     }else{
-        history.push("/articles/page/"+value)
+      history.push("/articles/page/"+i)
     }
-    setPage(value);
-  };
-  useEffect(() => {    
-    const query = history.location.pathname.split("/");
-    const page = query[query.length-1]
-    setPage(page);
-    //console.log(page)
-
-  },[]);
-  console.log(page)
+    
+    setPage(i)
+  }
   return (
-    <div className={classes.root}>
-      <Typography>Page: {page}</Typography>
-      <Pagination count={10} page={page} onChange={handleChange} />
-    </div>
+    <Paper>
+      {Array.from(Array(totalPage), (e,i)=>(
+      page === i+1 ? <Button key={i} onClick={()=>redirect(i+1)} aria-label="delete" variant="contained"  color="primary"> {i+1} </Button> :
+        <Button key={i} onClick={()=>redirect(i+1)} aria-label="delete" variant="outlined"  color="primary"> {i+1}  </Button>
+      ))}
+      </Paper>
   );
 }
-export default PaginationControlled

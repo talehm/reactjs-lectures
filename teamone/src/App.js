@@ -7,6 +7,7 @@ import  Footer from './components/Footer'
 import MainClass from "./components/MainClass"
 import {Mobile, Desktop} from "./components/shared/Responsive"
 import ArticlesDesktop from "./components/desktop/article/ArticlesDesktop"
+import Article from "./components/desktop/article/Article"
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,11 +23,14 @@ function App() {
       <Header />
         <Desktop>
         <Switch>
-          <Route path="/articles">
+          <Route exact path={["/articles", "/articles/page/:id"]}>
             <ArticlesDesktop />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <MainDesktop />
+          </Route>
+          <Route path="/article">
+            <Article />
           </Route>
         </Switch> 
           
